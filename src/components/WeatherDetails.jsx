@@ -12,19 +12,23 @@ class WeatherDetails extends Component {
         weather: null,
         temperture: null,
         humidity: null,
+        tomorrow: null,
+        afterTomorrow: null,
         isLoading: false,
         currentCity: {}
     }
     fetchWeatherInfo = async () => {
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.props.currentCoordinates.lat}&lon=${this.props.currentCoordinates.lon}&units=metric&appid=fdf68682559def6fde55c35e3924908e`)
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.props.currentCoordinates.lat}&lon=${this.props.currentCoordinates.lon}&units=metric&appid=1a8453ff3efc413ce93d10b8af80c2c3`)
             if (response.ok) {
                 const data = await response.json()
                 console.log('data', data)
                 this.setState({
-                    weather: data.weather[0].description,
-                    temperture: data.main.temp,
-                    humidity: data.main.humidity,
+                    weather: data.list[0].weather[0].description,
+                    temperture: data.list[0].main.temp,
+                    humidity: data.list[0].main.humidity,
+                    tomorrow: data.list[8].weather[0].description,
+                    afterTomorrow: data.list[16].weather[0].description,
                     isLoading: false
                 })
             } else {
@@ -86,43 +90,61 @@ class WeatherDetails extends Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Table striped bordered>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <h3>Weather</h3>
-                                            </td>
-                                            <td>
-                                                {this.state.isLoading &&
-                                                    <Spinner animation="grow" />}
-                                                {!this.state.isLoading &&
-                                                    <h3>{this.state.weather}</h3>}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h3>Temperature</h3>
-                                            </td>
-                                            <td>
-                                                {this.state.isLoading &&
-                                                    <Spinner animation="grow" />}
-                                                {!this.state.isLoading &&
-                                                    <h3>{this.state.temperture}°C</h3>}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h3>Humidity</h3>
-                                            </td>
-                                            <td>
-                                                {this.state.isLoading &&
-                                                    <Spinner animation="grow" />}
-                                                {!this.state.isLoading &&
-                                                    <h3>{this.state.humidity}%</h3>}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
+                                {this.state.isLoading &&
+                                    <Table striped>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <Spinner animation="grow" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>}
+                                {!this.state.isLoading &&
+                                    <Table striped>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <h3>Weather</h3>
+                                                </td>
+                                                <td>
+                                                    <h3>{this.state.weather}</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3>Temperature</h3>
+                                                </td>
+                                                <td>
+                                                    <h3>{this.state.temperture}°C</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3>Humidity</h3>
+                                                </td>
+                                                <td>
+                                                    <h3>{this.state.humidity}%</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3>Tomorrow</h3>
+                                                </td>
+                                                <td>
+                                                    <h3>{this.state.tomorrow}</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3>After tomorrow</h3>
+                                                </td>
+                                                <td>
+                                                    <h3>{this.state.afterTomorrow}</h3>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>}
                             </Col>
                         </Row>
                     </Container>}
