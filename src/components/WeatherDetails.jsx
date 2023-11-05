@@ -22,7 +22,7 @@ class WeatherDetails extends Component {
                 const data = await response.json()
                 console.log('data', data)
                 this.setState({
-                    weather: data.weather[0].main,
+                    weather: data.weather[0].description,
                     temperture: data.main.temp,
                     humidity: data.main.humidity,
                     isLoading: false
@@ -90,35 +90,35 @@ class WeatherDetails extends Component {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div className="d-flex justify-content-around">
-                                                    <h3>Weather</h3>
-                                                    {this.state.isLoading &&
-                                                        <Spinner animation="grow" />}
-                                                    {!this.state.isLoading &&
-                                                        <h3>{this.state.weather}</h3>}
-                                                </div>
+                                                <h3>Weather</h3>
+                                            </td>
+                                            <td>
+                                                {this.state.isLoading &&
+                                                    <Spinner animation="grow" />}
+                                                {!this.state.isLoading &&
+                                                    <h3>{this.state.weather}</h3>}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div className="d-flex justify-content-around">
-                                                    <h3>Temperature</h3>
-                                                    {this.state.isLoading &&
-                                                        <Spinner animation="grow" />}
-                                                    {!this.state.isLoading &&
-                                                        <h3>{this.state.temperture}°C</h3>}
-                                                </div>
+                                                <h3>Temperature</h3>
+                                            </td>
+                                            <td>
+                                                {this.state.isLoading &&
+                                                    <Spinner animation="grow" />}
+                                                {!this.state.isLoading &&
+                                                    <h3>{this.state.temperture}°C</h3>}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div className="d-flex justify-content-around">
-                                                    <h3>Humidity</h3>
-                                                    {this.state.isLoading &&
-                                                        <Spinner animation="grow" />}
-                                                    {!this.state.isLoading &&
-                                                        <h3>{this.state.humidity}%</h3>}
-                                                </div>
+                                                <h3>Humidity</h3>
+                                            </td>
+                                            <td>
+                                                {this.state.isLoading &&
+                                                    <Spinner animation="grow" />}
+                                                {!this.state.isLoading &&
+                                                    <h3>{this.state.humidity}%</h3>}
                                             </td>
                                         </tr>
                                     </tbody>
