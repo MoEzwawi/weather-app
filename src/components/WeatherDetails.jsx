@@ -51,7 +51,7 @@ class WeatherDetails extends Component {
         return (
             <>
                 {!this.state.weather &&
-                    <Container className="mt-3">
+                    <Container className="mt-3 flex-grow-1">
                         <Row>
                             <Col>
                                 <img src="https://pathwayshealth.org/wp-content/uploads/2023/08/images-1.png" width={'180px'} height={'180px'} alt="sun" />
@@ -60,7 +60,7 @@ class WeatherDetails extends Component {
                                 <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1684366/cloud-with-rain-clipart-md.png" width={'180px'} height={'180px'} alt="rain" />
                             </Col>
                         </Row>
-                        <Alert variant="success" className="mb-4 mt-1">
+                        <Alert variant="success" className="mb-4 mt-3">
                             <Alert.Heading>Hey, nice to see you</Alert.Heading>
                             <p>
                                 Welcome to Weather App - Your Ultimate Destination for Accurate Weather Forecasts!
@@ -74,8 +74,8 @@ class WeatherDetails extends Component {
                         </Alert>
                     </Container>}
                 {this.state.weather &&
-                    <Container>
-                        <Row>
+                    <Container className="flex-grow-1">
+                        <Row className="mt-3 mb-2">
                             <Col>
                                 <h2>{this.state.currentCity.city}</h2>
                             </Col>
